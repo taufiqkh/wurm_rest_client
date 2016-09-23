@@ -1,0 +1,2 @@
+defmodule WurmRestClient do
+end
