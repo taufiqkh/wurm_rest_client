@@ -2,3 +2,7 @@
 *.iml
 
 *.*~
+
+# Elixir
+*.beam
+_build/
