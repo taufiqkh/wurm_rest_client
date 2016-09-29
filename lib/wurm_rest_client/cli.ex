@@ -5,7 +5,9 @@ defmodule WurmRestClient.CLI do
   """
 
   def run(argv) do
-    parse_args(argv)
+    argv
+    |> parse_args
+    |> process
   end
 
   @doc """
@@ -22,6 +24,26 @@ defmodule WurmRestClient.CLI do
         # only 'get' supported for now
         %{operation: :get, player: %{ name: player }}
       _ -> :help
+    end
+  end
+
+  def usage(exit) do
+    IO.puts """
+    usage: wurm_rest_client --player <name> <operation>
+    where operation is one of the following:
+    - get   Gets details of the given player
+    """
+    System.halt(exit)
+  end
+
+  def process(:help) do
+    usage(0)
+  end
+
+  def process(%{operation: operation, player: %{name: player}}) do
+    case operation do
+      :get -> ""
+      _ -> usage(1)
     end
   end
 end

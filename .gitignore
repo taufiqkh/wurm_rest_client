@@ -6,3 +6,4 @@
 # Elixir
 *.beam
 _build/
+deps/
