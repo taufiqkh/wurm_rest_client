@@ -29,7 +29,8 @@ defmodule WurmRestClient.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 0.9.2"},
-      {:mock, "~> 0.1.1", only: :test}
+      {:poison, "~> 2.2"},
+      {:mock, "~> 0.1.1", only: :test},
     ]
   end
 end

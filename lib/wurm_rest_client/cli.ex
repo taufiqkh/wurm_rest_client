@@ -21,8 +21,8 @@ defmodule WurmRestClient.CLI do
     case parse do
       {[help: true], _, _} -> :help
       {[player: player], _operations, _} ->
-        # only 'get' supported for now
-        %{operation: :get, player: %{ name: player }}
+        # only 'get_money' supported for now
+        %{operation: :get_money, player: %{ name: player }}
       _ -> :help
     end
   end
@@ -31,7 +31,7 @@ defmodule WurmRestClient.CLI do
     IO.puts """
     usage: wurm_rest_client --player <name> <operation>
     where operation is one of the following:
-    - get   Gets details of the given player
+    - money Gets balance details for the given player
     """
     System.halt(exit)
   end
@@ -40,9 +40,9 @@ defmodule WurmRestClient.CLI do
     usage(0)
   end
 
-  def process(%{operation: operation, player: %{name: player}}) do
+  def process(%{operation: operation, player: player}) do
     case operation do
-      :get -> ""
+      :get_money -> WurmRestClient.Player.fetch_money(player)
       _ -> usage(1)
     end
   end
