@@ -14,11 +14,13 @@ defmodule WurmRestClient.CLI do
   Returns a `:help` if help was given
   """
   def parse_args(argv) do
-    parse = OptionParser.parse(argv, switches: [help: :boolean], aliases: [h: :help])
+    parse = OptionParser.parse(argv, switches: [help: :boolean, player: :string], aliases: [h: :help, p: :player])
 
     case parse do
       {[help: true], _, _} -> :help
-      {_, [player], _} -> %{ :player => %{ :name => player }}
+      {[player: player], _operations, _} ->
+        # only 'get' supported for now
+        %{operation: :get, player: %{ name: player }}
       _ -> :help
     end
   end
