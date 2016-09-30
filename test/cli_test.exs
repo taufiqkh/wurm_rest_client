@@ -13,7 +13,7 @@ defmodule CLITest do
   end
 
   test "player returned by option parsing with --player option" do
-    assert %{operation: :get, player: %{name: "test"}} == parse_args(["-p", "test"])
-    assert %{operation: :get, player: %{name: "test2"}} == parse_args(["--player", "test2"])
+    assert %{operation: :get_money, player: %{name: "test"}} == parse_args(["-p", "test", "money"])
+    assert %{operation: :get_money, player: %{name: "test2"}} == parse_args(["--player", "test2", "money"])
   end
 end

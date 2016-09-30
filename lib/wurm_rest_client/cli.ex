@@ -20,7 +20,7 @@ defmodule WurmRestClient.CLI do
 
     case parse do
       {[help: true], _, _} -> :help
-      {[player: player], _operations, _} ->
+      {[player: player], ["money"], _} ->
         # only 'get_money' supported for now
         %{operation: :get_money, player: %{ name: player }}
       _ -> :help

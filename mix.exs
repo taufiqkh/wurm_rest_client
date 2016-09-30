@@ -3,11 +3,13 @@ defmodule WurmRestClient.Mixfile do
 
   def project do
     [app: :wurm_rest_client,
-     escript: escript_config,
+     name: "Wurm Rest Client",
      version: "0.1.0",
      elixir: "~> 1.3",
+     source_url: "https://github.com/taufiqkh/wurm_rest_client",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     escript: escript_config,
      deps: deps()]
   end
 
@@ -32,6 +34,8 @@ defmodule WurmRestClient.Mixfile do
       {:httpoison, "~> 0.9.2"},
       {:poison, "~> 2.2"},
       {:mock, "~> 0.1.1", only: :test},
+      {:ex_doc, "~> 0.14", only: :dev},
+      {:earmark, "~> 1.0", only: :dev},
     ]
   end
 

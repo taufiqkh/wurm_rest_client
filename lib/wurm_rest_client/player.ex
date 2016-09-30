@@ -3,8 +3,13 @@ defmodule WurmRestClient.Player do
   Retrieves player-related information from the external API
   """
 
+  require Logger
+
   @rest_url Application.get_env(:wurm_rest_client, :rest_url)
 
+  @doc """
+  Given a player, fetches that player's current bank balance.
+  """
   def fetch_money(player) do
     player_money_url(player)
     |> HTTPoison.get
@@ -19,23 +24,29 @@ defmodule WurmRestClient.Player do
     "#{player_url(player)}/money"
   end
 
+  @doc """
+  Given an :ok response to a Player request, returns an error code according to the response and its body as parsed from
+  JSON.
+
+  ## Example
+    iex> handle_response({:ok, %{status_code: 200, body: "{\"balance\": 260 }})
+    %{:ok, %{balance: 260}}
+  """
   def handle_response({:ok, %{status_code: status, body: body}}) do
     result_type = case status do
       200 -> :ok
       404 -> :missing
       504 -> :error_gateway
       400 ->
-        IO.puts "Bad request for player"
-        IO.inspect Poison.Parser.parse!(body)
-        System.halt(2)
+        Logger.error "Bad request for player: #{inspect(body)}"
+        :bad_request
       _ -> :unknown
     end
     {result_type, Poison.Parser.parse!(body)}
   end
 
-  def handle_response({:error, error}) do
-    {_, message} = List.keyfind(error, "message", 0)
-    IO.puts "Error fetching from Wurm API: #{message}"
-    System.halt(2)
+  def handle_response({:error, %HTTPoison.Error{reason: reason}}) do
+    Logger.warn "Error fetching from Wurm API: #{reason}"
+    {:error_connect, reason}
   end
 end
