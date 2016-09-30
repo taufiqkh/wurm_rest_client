@@ -19,13 +19,18 @@ defmodule WurmRestClient.Player do
     "#{player_url(player)}/money"
   end
 
-  def handle_response({:ok, %{status_code: 200, body: body}}) do
-    {:ok, Poison.Parser.parse!(body)}
-  end
-
   def handle_response({:ok, %{status_code: status, body: body}}) do
-    IO.puts "Unknown status #{status}"
-    {:unknown, Poison.Parser.parse!(body)}
+    result_type = case status do
+      200 -> :ok
+      404 -> :missing
+      504 -> :error_gateway
+      400 ->
+        IO.puts "Bad request for player"
+        IO.inspect Poison.Parser.parse!(body)
+        System.halt(2)
+      _ -> :unknown
+    end
+    {result_type, Poison.Parser.parse!(body)}
   end
 
   def handle_response({:error, error}) do
