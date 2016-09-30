@@ -3,6 +3,7 @@ defmodule WurmRestClient.Mixfile do
 
   def project do
     [app: :wurm_rest_client,
+     escript: escript_config,
      version: "0.1.0",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
@@ -32,5 +33,9 @@ defmodule WurmRestClient.Mixfile do
       {:poison, "~> 2.2"},
       {:mock, "~> 0.1.1", only: :test},
     ]
+  end
+
+  defp escript_config do
+    [ main_module: WurmRestClient.CLI ]
   end
 end

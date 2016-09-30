@@ -4,7 +4,7 @@ defmodule WurmRestClient.CLI do
   exploration of the Wurm REST API.
   """
 
-  def run(argv) do
+  def main(argv) do
     argv
     |> parse_args
     |> process
