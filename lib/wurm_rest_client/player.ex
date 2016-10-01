@@ -7,13 +7,6 @@ defmodule WurmRestClient.Player do
 
   @rest_url Application.get_env(:wurm_rest_client, :rest_url)
 
-  # Fetch a URL and handle the response
-  defp _fetch(url) do
-    url
-    |> HTTPoison.get
-    |> handle_response
-  end
-
   @doc """
   Fetch a count of all players currently playing
   """
@@ -68,25 +61,36 @@ defmodule WurmRestClient.Player do
   Where reason is an atom representing the reason for the call failure.
 
   ## Example
-    iex> handle_response({:ok, %{status_code: 200, body: "{\"balance\": 260 }})
+    iex> handle_response("http://localhost:8080/players/Bob/money", {:ok, %{status_code: 200, body: "{\"balance\": 260 }})
     %{:ok, %{balance: 260}}
-    iex> handle_response({:error, %HTTPoison.Error{reason: :timeout}})
+    iex> handle_response("http://localhost:8080/players/Anne/money", {:error, %HTTPoison.Error{reason: :timeout}})
     %{:error_connect, :timeout}
   """
-  def handle_response({:ok, %{status_code: status, body: body}}) do
+  def handle_response(url, {:ok, %{status_code: status, body: body}}) do
     result_type = case status do
       200 -> :ok
       404 -> :missing
       504 -> :error_gateway
       400 ->
-        Logger.error "Bad request for player: #{inspect(body)}"
+        Logger.error "Bad request for player at #{url}: #{inspect(body)}"
         :bad_request
       _ -> :unknown
     end
     {result_type, Poison.Parser.parse!(body)}
   end
-  def handle_response({:error, %HTTPoison.Error{reason: reason}}) do
-    Logger.warn "Error fetching from Wurm API: #{reason}"
+  def handle_response(url, {:error, %HTTPoison.Error{reason: reason}}) do
+    Logger.warn "Error fetching from Wurm API at #{url}: #{reason}"
     {:error_connect, reason}
   end
+
+
+  # Fetch a URL and handle the response
+  defp _fetch(url) do
+    url
+    |> HTTPoison.get
+    |> _handle_response(url).()
+  end
+
+  # Partial to handle the response for a specific URL
+  defp _handle_response(url), do: fn response -> handle_response(url, response) end
 end
