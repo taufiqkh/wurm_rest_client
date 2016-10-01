@@ -1,7 +1,8 @@
 # WurmRestClient
 
-Elixir client for the Wurm REST API, as implemented by
-[wurmrest](https://github.com/taufiqkh/wurmrest).
+Elixir client for the Wurm REST API, as implemented by [wurmrest](https://taufiqkh.github.io/wurmrest/). Full
+documentation including an API reference may be found at
+[https://taufiqkh.github.io/wurm_rest_client/](https://taufiqkh.github.io/wurm_rest_client/).
 
 
 ## Installation
