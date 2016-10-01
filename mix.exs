@@ -10,6 +10,11 @@ defmodule WurmRestClient.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      escript: escript_config,
+     docs: [
+      main: "readme",
+      extras: ["README.md"],
+      output: "docs",
+     ],
      deps: deps()]
   end
 

@@ -1,7 +1,7 @@
 defmodule WurmRestClient.CLI do
   @moduledoc """
-  Handle the command line parsing and dispatch to the core module. The command line exists as an example and for manual
-  exploration of the Wurm REST API.
+  Handles the command line parsing and dispatch to the core module. The command line exists as an example of using the
+  client and for manual exploration of the Wurm REST API.
   """
 
   def main(argv) do
