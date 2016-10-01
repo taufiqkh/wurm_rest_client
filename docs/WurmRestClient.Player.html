@@ -92,25 +92,37 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#fetch_money/1">fetch_money(player)</a>
+    <a href="#fetch/0">fetch()</a>
   </div>
   
-    <div class="summary-synopsis"><p>Given a player, fetches that player’s current bank balance</p>
+    <div class="summary-synopsis"><p>Fetch all players</p>
 </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#handle_response/1">handle_response(arg)</a>
+    <a href="#fetch/1">fetch(player)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Given a response to a Player request, returns a tuple depending on the response. If the API call was successfully
-completed, will return a response in the following form and its body as parsed from JSON:</p>
-<pre><code class="elixir">{ result_type, response_body}</code></pre>
-<p>A call may be successfully completed even if the result of that call was not success, for example if the player was
-not found. If the call was unsuccessful, returns a tuple in the following form:
-{ :error_connect, reason }
-Where reason is an atom representing the reason for the call failure</p>
+    <div class="summary-synopsis"><p>Fetch the details for a given player</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#fetch_count/0">fetch_count()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Fetch a count of all players currently playing</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#fetch_money/1">fetch_money(player)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Given a player, fetches that player’s current bank balance</p>
 </div>
   
 </div>
@@ -129,6 +141,24 @@ Where reason is an atom representing the reason for the call failure</p>
   </div>
   
     <div class="summary-synopsis"><p>Given a player, returns the URL that corresponds to that player</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#players_count_url/0">players_count_url()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The URL for retrieving a player count</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#players_url/0">players_url()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>The URL for retrieving all players</p>
 </div>
   
 </div>
@@ -153,14 +183,71 @@ Where reason is an atom representing the reason for the call failure</p>
             </a>
             Functions
           </h1>
-          <div class="detail" id="fetch_money/1">
+          <div class="detail" id="fetch/0">
+  <div class="detail-header">
+    <a href="#fetch/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">fetch()</span>
+    
+      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L18" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Fetch all players</p>
+
+  </section>
+</div>
+<div class="detail" id="fetch/1">
+  <div class="detail-header">
+    <a href="#fetch/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">fetch(player)</span>
+    
+      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L23" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Fetch the details for a given player</p>
+
+  </section>
+</div>
+<div class="detail" id="fetch_count/0">
+  <div class="detail-header">
+    <a href="#fetch_count/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">fetch_count()</span>
+    
+      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L13" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Fetch a count of all players currently playing</p>
+
+  </section>
+</div>
+<div class="detail" id="fetch_money/1">
   <div class="detail-header">
     <a href="#fetch_money/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
     <span class="signature">fetch_money(player)</span>
     
-      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L13" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L28" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -172,40 +259,6 @@ Where reason is an atom representing the reason for the call failure</p>
 
   </section>
 </div>
-<div class="detail" id="handle_response/1">
-  <div class="detail-header">
-    <a href="#handle_response/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">handle_response(arg)</span>
-    
-      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L50" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    <p>Given a response to a Player request, returns a tuple depending on the response. If the API call was successfully
-completed, will return a response in the following form and its body as parsed from JSON:</p>
-<pre><code class="elixir">{ result_type, response_body}</code></pre>
-<p>A call may be successfully completed even if the result of that call was not success, for example if the player was
-not found. If the call was unsuccessful, returns a tuple in the following form:
-{ :error_connect, reason }
-Where reason is an atom representing the reason for the call failure.</p>
-<h2 id="handle_response/1-example" class="section-heading">
-  <a href="#handle_response/1-example" class="hover-link"><i class="icon-link"></i></a>
-  Example
-</h2>
-
-<p>  iex&gt; handle_response({:ok, %{status_code: 200, body: “{“balance”: 260 }})
-  %{:ok, %{balance: 260}}
-  iex&gt; handle_response({:error, %HTTPoison.Error{reason: :timeout}})
-  %{:error_connect, :timeout}</p>
-
-  </section>
-</div>
 <div class="detail" id="player_money_url/1">
   <div class="detail-header">
     <a href="#player_money_url/1" class="detail-link" title="Link to this function">
@@ -213,7 +266,7 @@ Where reason is an atom representing the reason for the call failure.</p>
     </a>
     <span class="signature">player_money_url(player)</span>
     
-      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L29" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L50" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -232,7 +285,7 @@ Where reason is an atom representing the reason for the call failure.</p>
     </a>
     <span class="signature">player_url(player)</span>
     
-      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L22" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L43" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -241,6 +294,44 @@ Where reason is an atom representing the reason for the call failure.</p>
   </div>
   <section class="docstring">
     <p>Given a player, returns the URL that corresponds to that player</p>
+
+  </section>
+</div>
+<div class="detail" id="players_count_url/0">
+  <div class="detail-header">
+    <a href="#players_count_url/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">players_count_url()</span>
+    
+      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L38" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>The URL for retrieving a player count</p>
+
+  </section>
+</div>
+<div class="detail" id="players_url/0">
+  <div class="detail-header">
+    <a href="#players_url/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">players_url()</span>
+    
+      <a href="https://github.com/taufiqkh/wurm_rest_client/blob/master/lib/wurm_rest_client/player.ex#L33" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>The URL for retrieving all players</p>
 
   </section>
 </div>
